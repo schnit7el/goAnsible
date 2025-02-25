@@ -1,0 +1,14 @@
+nodes:
+  - address: "192.168.30.31:22"
+    user: "ubuntu-srv"
+    auth:
+      type: "password"
+      password: "secret"
+      ssh_key_path: ""
+      ssh_key_passphrase: ""
+      
+tasks:
+  - name: "Cleanup Old Images"
+    type: "command"
+    cmd: "docker image prune -a -f"
+    ignore_errors: true

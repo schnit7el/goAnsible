@@ -1,0 +1,13 @@
+nodes:
+  - name: prod-ubuntu-02
+    address: "192.168.30.31:22"
+    user: "ubuntu-srv"
+    auth:
+      type: "password"
+      password: "ubuntusrvjonprdonsmrdon57"
+
+tasks:
+  - name: "Cleanup Old Images"
+    type: "command"
+    cmd: "docker image prune -a -f"
+    ignore_errors: true

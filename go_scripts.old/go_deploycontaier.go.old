@@ -1,0 +1,34 @@
+package main
+
+import (
+	"fmt"
+	"os"
+	"os/exec"
+)
+
+func DeployContainer() {
+	// Define the Docker Compose file name
+	composeFile := "../compose/Memos/docker-compose.yml"
+
+	// Check if the file exists (optional)
+	if _, err := os.Stat(composeFile); os.IsNotExist(err) {
+		fmt.Printf("Note: %s does not exist. It will be created when you save in the editor.\n", composeFile)
+	}
+
+	// Open the file in an editor
+	fmt.Printf("Opening %s in Vim...\n", composeFile)
+	cmd := exec.Command("vim", composeFile)
+	cmd.Stdin = os.Stdin   // Connect stdin for interactive editing
+	cmd.Stdout = os.Stdout // Connect stdout
+	cmd.Stderr = os.Stderr // Connect stderr
+
+	err := cmd.Run()
+	if err != nil {
+		fmt.Printf("Error editing file: %v\n", err)
+		return
+	}
+
+	// Run docker-compose up -d after editor closes
+	fmt.Println("Starting Docker containers...")
+	exec.Command("ip", "a")
+}

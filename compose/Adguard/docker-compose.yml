@@ -1,0 +1,19 @@
+name: adguardhome
+
+services:
+  adguardhome:
+    image: adguard/adguardhome
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 3080:3080/tcp
+      - 3000:3000/tcp
+    volumes:
+      - ./data/config:/opt/adguardhome/conf
+      - ./data/work:/opt/adguardhome/work
+
+volumes:
+  config:
+    driver: local
+  work:
+    driver: local

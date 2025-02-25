@@ -1,0 +1,35 @@
+package main
+
+import (
+	"fmt"
+	"os/exec"
+)
+
+func SysUpdate() {
+	// Update the system
+	fmt.Println("Updating system...")
+	updateCmd := exec.Command("sudo", "apt", "update")
+	updateErr := updateCmd.Run()
+	if updateErr != nil {
+		return
+	}
+
+	// Upgrade the system
+	fmt.Println("Upgrading system...")
+	upgradeCmd := exec.Command("sudo", "apt", "upgrade", "-y")
+	upgradeErr := upgradeCmd.Run()
+	if upgradeErr != nil {
+		return
+	}
+
+	// // Check for stopped Docker containers
+	// fmt.Println("Checking running Docker containers...")
+	// psCmd := exec.Command("docker", "ps", "--filter", "status=exited", "--format", "{{.Names}}")
+	// psOut, psErr := psCmd.Output()
+	// if psErr != nil {
+	// 	fmt.Printf("Error checking Docker containers: %s\n", psErr)
+	// 	return
+	// }
+
+	// sendNotification("UPDATE STATUS", string(psOut))
+}

@@ -1,0 +1,17 @@
+$TTL 2d
+$ORIGIN domain.com. ; <-- CHANGE THIS
+
+@           IN      SOA     domain.com admin.domain.com ( ; <-- CHANGE THIS
+                                20230218		; serial number
+		                        3600			; refresh period
+		                        600			    ; retry period
+		                        604800			; expire time
+		                        1800 			; negative TTL
+                                )
+@           IN      NS      domain.com. ; <-- CHANGE THIS
+
+ns		    IN      A	    192.168.0.15 ; <-- CHANGE THIS
+
+; Main VLAN network services 
+router		IN		A		192.168.0.1
+rpi0        IN      A       192.168.0.16

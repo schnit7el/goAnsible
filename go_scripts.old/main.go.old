@@ -1,0 +1,46 @@
+package main
+
+import (
+	"fmt"
+	"log"
+)
+
+type Config struct {
+	Nodes []Node `yaml:"nodes"`
+	Tasks []Task `yaml:"tasks"`
+}
+
+type Node struct {
+	Address  string `yaml:"address"`
+	User     string `yaml:"user"`
+	Password string `yaml:"password"`
+}
+
+type Task struct {
+	Name    string `yaml:"name"`
+	Command string `yaml:"command"`
+}
+
+func deploy(config *Config) {
+	for _, node := range config.Nodes {
+		fmt.Printf("\n===== Deploying to %s =====\n", node.Address)
+		for _, task := range config.Tasks {
+			fmt.Printf("[%s] Running: %s\n", node.Address, task.Name)
+			output, err := executeCommand(node, task.Command)
+			if err != nil {
+				log.Printf("[%s] ERROR: %v", node.Address, err)
+				continue
+			}
+			fmt.Printf("[%s] Output:\n%s\n", node.Address, output)
+		}
+	}
+}
+
+func main() {
+	config, err := readConfig("deploy.yml")
+	if err != nil {
+		log.Fatalf("Config error: %v", err)
+	}
+
+	deploy(config)
+}

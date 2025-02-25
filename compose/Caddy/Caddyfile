@@ -1,0 +1,16 @@
+yes.hl.cargoesbrrr.com {
+    tls /certs/yes/cert.pem /certs/yes/key.pem
+    respond "yes"
+
+    @http {
+        protocol http
+    }
+    redir @http https://google.com
+}
+
+domain.com {
+    reverse_proxy http://1.1.1.1:11111
+    tls internal {
+        on_demand
+    }
+}

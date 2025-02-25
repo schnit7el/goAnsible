@@ -1,0 +1,13 @@
+nodes:
+  - address: "192.168.30.31:22"
+    user: "ubuntu-srv"
+    password: "ubuntusrvjonprdonsmrdon57"
+  - address: "192.168.30.30:22"
+    user: "ubuntu-srv"
+    password: "ubuntusrvjonprdonsmrdon57"
+
+tasks:
+  - name: "Update packages"
+    command: "sudo apt update"
+  - name: "Upgrade packages"
+    command: "sudo apt upgrade -y"
